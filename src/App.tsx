@@ -1,12 +1,13 @@
-import { useState } from 'react'
+
 import { Routes, Route } from 'react-router-dom'
 import './App.css'
-import firebase from 'firebase/compat/app';
-import * as firebaseui from 'firebaseui'
-import 'firebaseui/dist/firebaseui.css'
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
+
+const URL = `http://127.0.0.1:1337`;
+
 import Home from './views/Home'
+import NewGame from './views/NewGame';
+import Account from './views/Account';
+
 
 function App() {
 
@@ -14,8 +15,9 @@ function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path='/start' element={ <Home />} />
-
+        <Route path='/' element={ <Home /> } />
+        <Route path='/new-game' element={ <NewGame /> } />
+        {/* <Route path='/' element={ <Account /> } /> */}
       </Routes>
        
     </div>

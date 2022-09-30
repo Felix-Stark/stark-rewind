@@ -1,8 +1,13 @@
-
+import { useNavigate } from "react-router-dom"
 export default function header() {
+
+        const navigate = useNavigate();
+        function eventHandler() {
+                navigate('/start')
+        }
         return(
-                <div className="header">
-                        
-                </div>
+                <nav>
+                        <button onClick={eventHandler}></button>
+                </nav>
         )
 }
