@@ -1,15 +1,11 @@
-'use strict';
 
-// Constants
-const PORT = 8080;
-const HOST = '0.0.0.0';
-
+const { gamesDB } = require('./database/lowdb')
 const express = require('express');
 const cors = require('cors');
 const app = express();
 // const { newUser } = require('./database/nedb');
 const nedb = require('nedb-promise')
-const { newUser, newGame, removeGame, showGames, filterGames } = require('./database/nedb')
+
 
 
 app.use(cors({origin: '*'}));
@@ -25,7 +21,7 @@ app.post('/signup', async (request, response) => {
             success: true,
             userExists: false
       }
-      const userExists = await accountsDB.find({ username: credentials.username })
+      const userExists = await accountsDB({ username: credentials.username })
       if (userExists.length > 0) {
             resObj.userExists = true;
       }
@@ -62,7 +58,7 @@ app.post('/new-game', async (request, response) => {
       const resObj = {
             success: true
       }
-      gamesDB.insert(requestData)
+      gamesDB.push(requestData)
       response.json(resObj)
 })
 
@@ -96,3 +92,4 @@ app.get('/find-game', async (request, response) => {
 app.listen(PORT, HOST, () => {
       console.log(`Running on http://${HOST}:${PORT}`)
 })
+

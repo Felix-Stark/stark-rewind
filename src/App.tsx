@@ -4,8 +4,8 @@ import './App.css'
 import NewGame from './views/NewGame';
 import Nav from './views/Nav';
 import Home from './views/Home';
-import games from './assets/games.json'
-import { useEffect } from 'react';
+
+
 
 function App() {
 

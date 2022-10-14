@@ -1,5 +1,6 @@
 import { Game } from "../models/data"
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
+
 
 
 
@@ -9,9 +10,9 @@ function NewGame() {
       const [playerName, setPlayerName] = useState<string>('');
       const [gameList, setGameList] = useState<Game[]>([])
 
-      // useEffect(() => {
-      //       localStorage.setItem('gameList', JSON.stringify(gameList))
-      // }, [gameList])
+      
+
+
 
       function addGame(e: React.MouseEvent<HTMLButtonElement>) {
             e.preventDefault();

@@ -1,19 +1,20 @@
 import { useState, useEffect } from 'react'
-import games from '../assets/games.json'
+import gameList from '../../../rewindDB/database/gamesdb.json'
 import DisplayGame from '../components/DisplayGame'
 import { Game } from '../models/data'
 
 
 
 export default function GameList() {
-      const [allGames, setAllGames] = useState<Game[]>([])
+
+      const games = gameList.gamePosts
 
       const gamesArr = useEffect(() => {
             localStorage.getItem('allGames')
       })
       console.log(gamesArr)
       
-      const gameItem = allGames.map((game) => <DisplayGame gameInfo={game} key={game.gameId} />)
+      const gameItem = games.map((game) => <DisplayGame gameInfo={game} key={game.gameId} />)
       console.log(gameItem)
       
       return (
