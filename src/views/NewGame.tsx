@@ -1,77 +1,129 @@
 import { Game } from "../models/data"
-import { useState } from 'react'
+import { FormEvent, useState } from 'react'
+import { useNavigate } from "react-router-dom";
+import { uuid } from 'uuidv4'
 
+type NewGameProps = {
+  rewindGames: 'rewindGames';
+  gameArr: Game[];
+  setGameArr: React.Dispatch<React.SetStateAction<Game[]>>;
+};
 
-
-
-function NewGame() {
-
+function NewGame(props: NewGameProps) {
+      const navigate = useNavigate()
+      // const [newGame, setNewGame] = useState<Game>({
+      //       activity: '',
+      //       winner: '',
+      //       second: '',
+      //       third: '',
+      //       gameId: '',
+      //       gameTime: '',
+      //       date: ''
+      // })
       const [newGame, setNewGame] = useState<Game>()
-      const [playerName, setPlayerName] = useState<string>('');
-      const [gameList, setGameList] = useState<Game[]>([])
-
+      let allGames = props.gameArr
+      console.log('pre add', allGames.length)
       
-
-
-
-      function addGame(e: React.MouseEvent<HTMLButtonElement>) {
-            e.preventDefault();
-            if (!newGame) {return}
-            const gameListCopy = [...gameList];
-            const gameCopy = {...newGame}
-            gameListCopy.push(gameCopy)
-            setGameList(gameListCopy)
-            console.log(localStorage)
+      function addGame() {
+            if(newGame !== undefined) {
+                  // allGames.push(newGame);
+                  // localStorage.setItem(props.rewindGames, JSON.stringify(allGames))
+            }
+            console.log('in addGame', allGames.length)
       }
 
-      function addPlayer(e: React.MouseEvent<HTMLButtonElement>) {
-            e.preventDefault();
-            if(!newGame) {
-                  return
-            }
-            const gameCopy:Game = {...newGame}
-            gameCopy.players.push(playerName)
-            console.log('addPlayer', gameCopy)
+      function handleSubmit(e: FormEvent) {
+            e.preventDefault()
+            console.log(newGame)
+            addGame()
       }
 
       function changeHandler(e: React.ChangeEvent<HTMLInputElement>) {
-            if (!newGame) {return}
-            let gameCopy = {...newGame}
-            if(e.target.name == 'activity') {
-                  gameCopy.activity = e.target.value;
-            } else if (e.target.name == 'minutesPlayed') {
-                  gameCopy.minutesPlayed = e.target.value;
-            } else if (e.target.name == 'winner') {
-                  gameCopy.winner == e.target.value;
-            } else if (e.target.name == 'secondPlace') {
-                  gameCopy.secondPlace = e.target.value;
-            } else if (e.target.name == 'thirdPlace') {
-                  gameCopy.thirdPlace = e.target.value;
-            } else if (e.target.name == 'date') {
-                  gameCopy.date = e.target.value;
+            e.preventDefault();
+            if(newGame !== undefined) {
+                  let newGameCopy = {...newGame}
+
+                  if(e.target.name == 'activity') {
+                        newGameCopy.activity = e.target.value;
+                        console.log('activity: ', newGameCopy )
+                  } else if( e.target.name == 'winner' ) {
+                        newGameCopy.winner = '#1' + e.target.value
+                  } else if( e.target.name == 'second') {
+                        newGameCopy.second == '#2' + e.target.value
+                  } else if( e.target.name == 'third') {
+                        newGameCopy.third == '#3' + e.target.value
+                  } else if (e.target.name == 'game-time') {
+                        newGameCopy.gameTime = e.target.value;
+                  } else if (e.target.name == 'date') {
+                        newGameCopy.date = e.target.value;
+                  } else {
+                  }
+                  setNewGame(newGameCopy)
             }
-            gameCopy.gameId = Math.random()
-            setNewGame(gameCopy)
+      }
+      const navHome = () => {
+            navigate('/')
       }
 
+
       return (
-            <section>
-                  <form>
-                        <label htmlFor="players">Lägg till spelare</label>
-                        <input type="text" id="player" onChange={(e) => {setPlayerName(e.target.value)}} />
-                        <button onClick={addPlayer}>Lägg till spelare</button>
-                  </form>
-                  <form>
-                        <input type="text" name="activity" placeholder="Aktivitet" onChange={(e)=> {changeHandler(e)}} />
+        <section>
+          {/* <form className="form__game">
+                        <input type="text" name="activity" placeholder="Aktivitet" onChange={e => {setNewGame({
+                          activity: e.target.value,
+                          winner: "",
+                          second: "",
+                          third: "",
+                          gameId: "",
+                          gameTime: "",
+                          date: "",
+                        });}} />
                         <input type="text" name="winner" placeholder="Vinnare" />
                         <input type="text" name="secondPlace" placeholder="Andra plats" />
                         <input type="text" name="thirdPlace" placeholder="Tredje plats" />
-                        <input type="number" name="minutesPlayed" />
+                        <input type="number" name="minutesPlayed" placeholder="Time in minutes" />
                         <input type="date" name="date" />
-                        <button onClick={(e) => {addGame(e)}}>Lägg till spel</button>
-                  </form>
-            </section>
-      )
+                        <button onClick={handleSubmit}>Lägg till spel</button>
+                  </form> */}
+          <form className="form__game">
+            <input
+              type="text"
+              name="activity"
+              placeholder="Aktivitet"
+              onChange={(e) => {
+                changeHandler(e);
+              }}
+            />
+            <input
+              type="text"
+              name="winner"
+              placeholder="Vinnare"
+              onChange={(e) => changeHandler(e)}
+            />
+            <input
+              type="text"
+              name="second"
+              placeholder="Andra plats"
+              onChange={(e) => changeHandler(e)}
+            />
+            <input
+              type="text"
+              name="third"
+              placeholder="Tredje plats"
+              onChange={(e) => changeHandler(e)}
+            />
+            <input
+              type="number"
+              name="game-time"
+              placeholder="Time in minutes"
+              onChange={(e) => changeHandler(e)}
+            />
+            <input type="date" name="date" onChange={(e) => changeHandler(e)} />
+            <button onClick={handleSubmit}>Lägg till spel</button>
+          </form>
+          <button onClick={navHome}>Tillbaka till hem</button>
+        </section>
+      );
 }
 
 export default NewGame;
