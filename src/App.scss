@@ -1,0 +1,35 @@
+@use './style/variables';
+
+* {
+  margin: 0;
+  box-sizing: border-box;
+  font-family: variables.$primaryFont;
+
+  body {
+    background-color: variables.$primaryBg;
+
+    @include variables.flexContainer();
+    min-height: 100vh;
+
+
+    .App {
+      height: 100%;
+      margin: 0;
+      @include variables.flexContainer();
+      justify-content: space-between;
+      h1,
+      h2,
+      h3 {
+        font-family: variables.$headerFont;
+        font-weight: 700;
+      
+      }
+    }
+
+  @media screen and (min-width:786px) {
+    background-color: variables.$primaryBg;
+  }
+  
+  }
+
+}

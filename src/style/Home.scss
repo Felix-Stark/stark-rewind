@@ -1,0 +1,25 @@
+@use "variables";
+@use "sass:color";
+@use "buttons";
+
+.home {
+	width: 100vw;
+	@include variables.flexContainer();
+	align-items: center;
+	gap: 2em;
+	margin: 0 auto;
+
+}
+.main_btn {
+	@include buttons.main();
+}
+
+.game-list {
+	width: 70%;
+	@include variables.flexContainer();
+	gap: 1em;
+}
+.wins {
+	font-size: 2em;
+	font-weight: 600;
+}

@@ -1,0 +1,29 @@
+@use "variables";
+@use "sass:color";
+
+.game__card {
+	margin: 0em;
+	width: 100%;
+
+	@include variables.flexContainer(row);
+	justify-content: space-evenly;
+	background-color: variables.$cardBg;
+	.card__head {
+		text-align: center;
+	}
+	.rank {
+		list-style-type: none;
+		@include variables.flexContainer();
+		justify-content: center;
+		gap: .5em;
+		.player span {
+			font-weight: 600;
+		}
+		.player {
+			cursor: pointer;
+			&:hover {
+				opacity: 20%;
+			}
+		}
+	}
+}

@@ -1,9 +1,9 @@
 import { Routes, Route } from 'react-router-dom';
 
 import { useState, useEffect } from 'react';
-import './App.css'
+import './App.scss'
 import NewGame from './views/NewGame';
-import Nav from './views/Nav';
+
 import Home from './views/Home';
 import { data } from './assets/defaultData'
 import { Game } from './models/data';
@@ -24,17 +24,33 @@ function App() {
     } else {
       games = JSON.parse(localGames);
       setGameArr(games);
+      
     }
-    console.log('in uE gameArr', gameArr)
-  }, [gameArr]);
+    console.log('in uE games', games)
+  }, []);
   
 
   return (
     <div className="App">
-      <Nav />
       <Routes>
-        <Route path="/" element={<Home gameArr={gameArr} />} />
-        <Route path="/newgame" element={<NewGame gameArr={gameArr} setGameArr={setGameArr} rewindGames={rewindGames} />} />
+        <Route
+          path="/"
+          element={
+            <Home
+              gameArr={gameArr}
+            />
+          }
+        />
+        <Route
+          path="/newgame"
+          element={
+            <NewGame
+              gameArr={gameArr}
+              setGameArr={setGameArr}
+              rewindGames={rewindGames}
+            />
+          }
+        />
         <Route path="/*" element={<Error />} />
       </Routes>
     </div>

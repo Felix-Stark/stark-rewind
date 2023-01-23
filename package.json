@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "setup-backend": "cd backend && tsc && node dist/server.js",
+    "build-sass": "sass .src:dist",
     "preview": "vite preview"
   },
   "dependencies": {

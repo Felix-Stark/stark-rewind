@@ -30,8 +30,9 @@ function NewGame(props: NewGameProps) {
             date: newDate
       }
       function addGame() {
-            localStorage.setItem(props.rewindGames, allGames)
+            localStorage.setItem(props.rewindGames, JSON.stringify(allGames))
             console.log('in addGame', allGames.length)
+            navigate("/");
       }
 
       function handleSubmit(e: FormEvent) {
@@ -77,15 +78,12 @@ function NewGame(props: NewGameProps) {
         if (e.target.value !== " ") {
           setNewDate(e.target.value);
         }
+
       };
       
-      const navHome = () => {
-            navigate('/')
-      }
-
 
       return (
-        <section>
+        <section className="form__container">
           <form className="form__game" onSubmit={(e)=> {handleSubmit(e)}}>
             <input
               type="text"
@@ -120,9 +118,8 @@ function NewGame(props: NewGameProps) {
               onChange={(e) => handleGameTime(e)}
             />
             <input type="date" name="date" onChange={(e) => handleDate(e)} />
-            <button type="submit">Lägg till spel</button>
+            <button type="submit" className="main_btn">Lägg till spel</button>
           </form>
-          <button onClick={navHome}>Tillbaka till hem</button>
         </section>
       );
 }
