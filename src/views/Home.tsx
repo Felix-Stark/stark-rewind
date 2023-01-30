@@ -14,7 +14,8 @@ type HomeProps = {
 export default function Home(props: HomeProps) {
       const rewindGames = 'rewindGames'
       const navigate = useNavigate();
-      let latestWins: number = 0;
+      let tenWins: number = 0;
+      let allWins: number = 0;
       const [showAll, setShowAll] = useState<boolean>(false);
       const [showTen, setShowTen] = useState<boolean>(false);
       const [playerGames, setPlayerGames] = useState<Game[]>([])
@@ -46,7 +47,7 @@ export default function Home(props: HomeProps) {
 
       const mapAllGames = gamesByDate.map((game) => {
             if (game.winner == "Felix") {
-              latestWins++;
+              allWins++;
             }
             return (
               <DisplayGame
@@ -61,11 +62,11 @@ export default function Home(props: HomeProps) {
 
 
       const mapTenGames = gamesByDate.map((game, index) => {
-            if (game.winner == "Felix") {
-              latestWins = 0
-            }
+
             if(index < 10) {
-                  latestWins++;
+                  if (game.winner == "Felix") {
+                        tenWins++;
+                  }
                   return (
                     <DisplayGame
                       gameInfo={game}
@@ -78,7 +79,7 @@ export default function Home(props: HomeProps) {
             }
       });
 
-      
+      // const countTen = mapTenGames.i
       
       const newGame = () => {
             navigate('/newgame')
@@ -96,11 +97,18 @@ export default function Home(props: HomeProps) {
             <button onClick={newGame} className="main_btn">Add new game</button>
           </div>
           <div>
-            <h4 className="wins">Latest wins: { String(latestWins) }</h4>
+            { showAll ? 
+                  <h4 className="wins">Latest wins: { String(allWins) }</h4>
+                  : ""
+            }
+            { showTen ? 
+                  <h4 className="wins">Latest wins: { String(tenWins) }</h4>
+                  :""
+            }
           </div>
           <section className="game-list">
             {showAll ? mapAllGames.reverse() : ""}
-            {showTen ? mapTenGames : ""}
+            {showTen ? mapTenGames.reverse() : ""}
           </section>
         </div>
       );
