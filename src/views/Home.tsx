@@ -60,7 +60,6 @@ export default function Home(props: HomeProps) {
                   setShowTen(false)
             }
 			const selectedPlayerGames = props.gameArr.filter((game) =>  game.players.includes(player));
-      		console.log('Home: ', selectedPlayerGames)
 			setFilterGames(selectedPlayerGames);
       }
       
