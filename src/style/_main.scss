@@ -13,13 +13,29 @@
 .main_btn {
 	@include buttons.main();
 }
+.secondary_btn {
+	@include buttons.main($pad: .5em 1em,
+  $bg: #377395)
+}
 
 .game-list {
 	width: 70%;
 	@include variables.flexContainer();
+	align-items: center;
 	gap: 1em;
 }
 .wins {
 	font-size: 2em;
 	font-weight: 600;
+}
+
+.form__game {
+	@include variables.flexContainer();
+	gap: 1.5rem;
+	width: 15rem;
+	margin-top: 2rem;
+	input {
+		line-height: 2rem;
+		border-radius: 5px;
+	}
 }

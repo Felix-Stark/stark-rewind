@@ -3,7 +3,7 @@
 
 @mixin main(
   $pad: .5em 1em,
-  $bg: #377395
+  $bg: #89c2e3
 ) {
   border: none;
   padding: $pad;
@@ -16,3 +16,4 @@
   cursor: pointer;
   
 }
+

@@ -3,14 +3,15 @@
 
 .game__card {
 	margin: 0em;
-	width: 100%;
+	width: 70%;
+	padding: 0rem 1rem;
 
 	@include variables.flexContainer(row);
-	justify-content: space-evenly;
+	justify-content: space-between;
 	background-color: variables.$cardBg;
-	.card__head {
-		text-align: center;
-	}
+	// .card__head {
+
+	// }
 	.rank {
 		list-style-type: none;
 		@include variables.flexContainer();

@@ -1,9 +1,11 @@
 
 export type Game = {
       activity: string;
+      players: string[];
       gameTime: string;
       winner: string;
-      second: string;
-      third: string;
+      secondPlace: string;
+      thirdPlace: string;
       date: string;
+      gameId: number;
 }

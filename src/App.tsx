@@ -5,7 +5,7 @@ import './App.scss'
 import NewGame from './views/NewGame';
 
 import Home from './views/Home';
-import { data } from './assets/defaultData'
+import data from './assets/defaultData.json'
 import { Game } from './models/data';
 import Error from './views/Error';
 // om inga spel i localGames så används defaultData. om det finns spel localGames så sparas dom i gameArr. 
@@ -16,18 +16,17 @@ function App() {
   let games: Game[] = [];
   const rewindGames = "rewindGames";
   
+  let localGames = localStorage.getItem(rewindGames);
   useEffect(() => {
-    let localGames = localStorage.getItem(rewindGames);
     if (!localGames) {
-      games = data.games;
+      games = data;
       setGameArr(games);
     } else {
       games = JSON.parse(localGames);
       setGameArr(games);
-      
     }
-    console.log('in uE games', games)
-  }, []);
+
+  }, [localGames]);
   
 
   return (
@@ -38,6 +37,7 @@ function App() {
           element={
             <Home
               gameArr={gameArr}
+              setGameArr={setGameArr}
             />
           }
         />
@@ -47,7 +47,7 @@ function App() {
             <NewGame
               gameArr={gameArr}
               setGameArr={setGameArr}
-              rewindGames={rewindGames}
+              // rewindGames={rewindGames}
             />
           }
         />
